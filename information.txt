@@ -6,3 +6,5 @@ npm install express-async-handler
 npm install mongoose
 npm install bcrypt
 npm i jsonwebtoken
+npm install cors
+npm install axios

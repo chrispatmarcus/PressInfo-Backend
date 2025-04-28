@@ -14,6 +14,15 @@ const eventSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add an event description"],
     },
+    sectionType: {
+      type: String,
+      enum: ["Presbytery", "Congregation"], // Limit values to these two
+      required: true, // Ensure it’s always present
+    },
+    sectionName: {
+      type: String,
+      required: true, // Ensure the name is always present
+    },
   },
   {
     timestamps: true,

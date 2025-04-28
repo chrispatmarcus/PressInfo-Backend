@@ -7,16 +7,17 @@ const {
   createEvent,
   updateEvent,
   deleteEvent,
+  getEventsBySection,
 } = require("../controllers/eventsController");
 const validateToken = require("../middleware/validateTokenHandler");
 
-router.use(validateToken);
+// router.use(validateToken);
 
 router.route("/").get(getEvents).post(upload.single("image"), createEvent); // File upload
 
 router
   .route("/:id")
-  .get(getEvent)
+  .get(getEventsBySection)
   .put(upload.single("image"), updateEvent) // File upload
   .delete(deleteEvent);
 

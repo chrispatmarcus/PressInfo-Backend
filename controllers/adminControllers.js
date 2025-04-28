@@ -25,7 +25,7 @@ const registerAdmin = asyncHandler(async (req, res) => {
     phoneNum,
     password: hashedPassword,
   });
-  console.log(`admin created ${user}`);
+  console.log(`admin created ${admin}`);
   if (admin) {
     res.status(201).json({ _id: admin.id, phoneNum: admin.phoneNum });
   } else {
