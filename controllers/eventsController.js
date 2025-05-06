@@ -34,12 +34,19 @@ const createEvent = async (req, res) => {
     console.log("===> SectionName:", req.body.sectionName); // Capture sectionName
     console.log("===> File:", req.file);
 
+    // const event = await Event.create({
+    //   title: req.body.title,
+    //   imagePath: req.file.path,
+    //   description: req.body.description,
+    //   sectionType: req.body.sectionType, // Store section type
+    //   sectionName: req.body.sectionName, // Store section name
+    // });
     const event = await Event.create({
       title: req.body.title,
-      imagePath: req.file.path,
       description: req.body.description,
-      sectionType: req.body.sectionType, // Store section type
-      sectionName: req.body.sectionName, // Store section name
+      sectionType: req.body.sectionType,
+      sectionName: req.body.sectionName,
+      imagePaths: req.files.map((file) => file.path), // map all file paths
     });
 
     console.log("===> Event saved:", event);

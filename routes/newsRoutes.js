@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/uploadHandler");
+const { uploadSingle, uploadMultiple } = require("../middleware/uploadHandler");
 const {
   getNews,
   getNew,
@@ -12,12 +13,13 @@ const validateToken = require("../middleware/validateTokenHandler");
 
 router.use(validateToken);
 
-router.route("/").get(getNews).post(upload.single("image"), createNews); // File upload
+router.route("/").get(getNews).post(uploadMultiple, createNews); // File upload
 
 router
   .route("/:id")
   .get(getNew)
-  .put(upload.single("image"), updateNews) // File upload
+  // .put(upload.single("image"), updateNews)
+  .put(uploadMultiple, updateNews) // Update with multiple images
   .delete(deleteNews);
 
 module.exports = router;
