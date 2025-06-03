@@ -1,26 +1,26 @@
 const mongoose = require("mongoose");
 
-const sermonSchema = mongoose.Schema(
+const sermonSchema = new mongoose.Schema(
   {
+    congregation: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
-      required: [true, "Please add a sermon title"],
+      required: true,
     },
     text: {
       type: String,
-      required: [true, "Please add sermon text"],
+      required: true,
+    },
+    fileUrl: {
+      type: String,
+      required: true,
     },
     preacher: {
       type: String,
-      required: [true, "Please add preacher name"],
-    },
-    documentPath: {
-      type: String, // Stores document file path
-      required: [true, "Please upload the sermon document"],
-    },
-    datePreached: {
-      type: Date,
-      required: [true, "Please add the sermon date"],
+      required: true,
     },
   },
   { timestamps: true }

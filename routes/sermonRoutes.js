@@ -1,24 +1,25 @@
 const express = require("express");
-const router = express.Router();
-const upload = require("../middleware/uploadSermonHandler");
+const multer = require("multer");
 const {
-  createSermon,
-  getSermon,
-  updateSermon,
-  deleteSermon,
+  postSermon,
+  getSermonsByCongregation,
   getSermons,
 } = require("../controllers/sermonController");
-const validateToken = require("../middleware/validateTokenHandler");
 
-router.use(validateToken);
+const router = express.Router();
 
-router.route("/").get(getSermons).post(upload.single("document"), createSermon); // File upload
+// File upload config
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, "uploads/sermons"),
+  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
+});
+const upload = multer({ storage });
 
-router
-  .route("/:id")
-  .get(getSermon)
-  .put(upload.single("image"), updateSermon) // File upload
-  .delete(deleteSermon);
-// router.post("/", upload.single("document"), createSermon);
+// POST: upload sermon
+router.post("/upload", upload.single("file"), postSermon);
+
+// GET: sermons for a congregation
+router.get("/:congregation", getSermonsByCongregation);
+router.get("/", getSermons);
 
 module.exports = router;
