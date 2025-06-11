@@ -7,7 +7,7 @@ const postSermon = async (req, res) => {
 
     if (!file) return res.status(400).json({ message: "File is required." });
 
-    const fileUrl = `/uploads/sermons/${file.filename}`;
+    const fileUrl = `http://localhost:5001/uploads/sermons/${file.filename}`;
 
     const newSermon = new Sermon({
       congregation,
@@ -28,10 +28,10 @@ const postSermon = async (req, res) => {
   }
 };
 
-const getSermons = async (req, res) =>{
-  const sermons = await Sermon.find()
-  res.status(200).json(sermons)
-}
+const getSermons = async (req, res) => {
+  const sermons = await Sermon.find();
+  res.status(200).json(sermons);
+};
 
 const getSermonsByCongregation = async (req, res) => {
   try {
@@ -46,4 +46,4 @@ const getSermonsByCongregation = async (req, res) => {
   }
 };
 
-module.exports = { postSermon, getSermonsByCongregation, getSermons};
+module.exports = { postSermon, getSermonsByCongregation, getSermons };
